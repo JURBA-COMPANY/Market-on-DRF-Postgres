@@ -1,0 +1,11 @@
+create table users
+(  
+  user_id bigserial primary key, 
+  "name" varchar(50) NOT NULL,
+	seсond_name varchar(50) NOT null,
+  phone varchar(12) NOT NULL,
+  email varchar(100) NOT NULL,
+  is_admin bool NOT NULL,
+  CHECK (phone SIMILAR TO '79([0-9]{9})' OR phone SIMILAR TO '\+79([0-9]{9})'),
+  CHECK (email like '%_@_%._%')
+);
