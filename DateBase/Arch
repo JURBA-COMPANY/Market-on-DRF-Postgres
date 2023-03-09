@@ -9,3 +9,83 @@ create table users
   CHECK (phone SIMILAR TO '79([0-9]{9})' OR phone SIMILAR TO '\+79([0-9]{9})'),
   CHECK (email like '%_@_%._%')
 );
+
+create table colours
+(
+	colour_id bigserial primary key,
+	colour_name varchar(30) NOT null
+);
+
+create table diler
+(
+	diler_id serial primary key,
+	diler_name varchar(20) NOT Null,
+	is_realted bool NOT null
+
+);
+
+create table shipment
+(
+	ship_id bigserial primary key,
+	ship_date timestamp NOT null,
+	weight float(30) NOT null,
+	diler_id serial references diler(diler_id),
+	CHECK (weight > 0.5)
+
+);
+
+create table furniture
+(
+	id bigserial primary key,
+	"length" float(20) NOT null,
+	height float(20) not null,
+	"depth" float(20) not null,
+	ship_name bigserial references shipment(ship_id),
+	"cost" int not null,
+	colour_id int references colours(colour_id),
+	CHECK ( "length" between 0.3 and 10),
+	CHECK (height between 0.1 and 5),
+	CHECK ("depth" between 0.1 and 5),
+	CHECK ("cost" > 0)
+
+);
+
+create table sofa
+(
+	id bigserial references furniture(id),
+	num_seats int NOT null,
+	expand bool,
+	corner bool not null
+);
+
+create table wardrobe
+(
+	id bigserial references furniture(id),
+	num_shelfs int NOT null,
+	CHECK (num_shelfs > 0)
+
+);
+
+create table wardrobe
+(
+	id bigserial references furniture(id),
+	num_shelfs int NOT null,
+	CHECK (num_shelfs > 0)
+
+);
+
+create table orders
+(
+	user_id bigserial references users(user_id),
+	order_date timestamp not null,
+	order_cost float(15) not null
+	CHECK (order_cost > 0)
+);
+
+create table basket
+(
+	stuff_id bigserial references furniture(id),
+	user_id bigserial references users(user_id),
+	quantity int not null,
+	CHECK (quantity > 0)
+);
