@@ -66,11 +66,10 @@ create table wardrobe
 
 );
 
-create table wardrobe
+create table stol
 (
 	id bigserial references furniture(id),
-	num_shelfs int NOT null,
-	CHECK (num_shelfs > 0)
+	expand bool NOT null,
 
 );
 
