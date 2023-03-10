@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, MetaData, ForeignKey, Table, Column, BigInteger,\
+from sqlalchemy import create_engine, MetaData, ForeignKey, Table, Column, BigInteger, \
     VARCHAR, Boolean, Integer, Float, TIMESTAMP, CheckConstraint
 
 meta = MetaData()
@@ -9,7 +9,9 @@ users = Table('users', meta,
               Column('second_name', VARCHAR(50), nullable=False),
               Column('phone', VARCHAR(12), nullable=False),
               Column('email', VARCHAR(100), nullable=False),
-              Column('is_admin', Boolean, nullable=False))
+              Column('is_admin', Boolean, nullable=False),
+              CheckConstraint('email LIKE "%_@_%._%"'),
+              CheckConstraint('phone LIKE "\+79([0-9]{9})"'))
 
 colours = Table('colours', meta,
                 Column('colour_id', BigInteger, primary_key=True),
