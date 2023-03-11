@@ -121,15 +121,16 @@ VALUES
 (2, 'TestCompany2', False),
 (3, 'TableIndustries', True),
 (4, 'WardrobePride', True),
-(5, 'SofaLine', True);
+(5, 'SofaLine', True),
+(6, 'Emelyanov`s tables', True);
 
 INSERT INTO shipment (ship_id, diler_id, ship_date, weight)
 VALUES
-(DEFAULT, DEFAULT, '2023-11-12 11:24:11', 30.5),
-(DEFAULT, DEFAULT, '2023-10-24 12:41:32', 40.6),
-(DEFAULT, DEFAULT, '2023-09-28 14:05:45', 42.4),
-(DEFAULT, DEFAULT, '2022-08-06 16:32:10', 35.5),
-(DEFAULT, DEFAULT, '2022-07-08 09:05:06', 19.9);
+(DEFAULT, 3, '2023-11-12 11:24:11', 30.5),
+(DEFAULT, 4, '2023-10-24 12:41:32', 40.6),
+(DEFAULT, 5, '2023-09-28 14:05:45', 42.4),
+(DEFAULT, 6, '2022-08-06 16:32:10', 35.5),
+(DEFAULT, 5, '2022-07-08 09:05:06', 19.9);
 
 INSERT INTO furniture (ship_name, "id", colour_id, "length", height, "depth", "cost")
 VALUES
