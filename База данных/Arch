@@ -20,7 +20,7 @@ create table diler
 (
 	diler_id serial primary key,
 	diler_name varchar(20) NOT Null,
-	is_realted bool NOT null
+	is_related bool NOT null
 
 );
 
