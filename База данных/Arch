@@ -1,0 +1,194 @@
+create table users
+(  
+  user_id bigserial primary key, 
+  "name" varchar(50) NOT NULL,
+  seсond_name varchar(50) NOT null,
+  phone varchar(12) NOT NULL,
+  email varchar(100) NOT NULL,
+  is_admin bool NOT NULL,
+  CHECK (phone SIMILAR TO '79([0-9]{9})' OR phone SIMILAR TO '\+79([0-9]{9})'),
+  CHECK (email like '%_@_%._%')
+);
+
+create table colours
+(
+	colour_id bigserial primary key,
+	colour_name varchar(30) NOT null
+);
+
+create table diler
+(
+	diler_id serial primary key,
+	diler_name varchar(20) NOT Null,
+	is_realted bool NOT null
+
+);
+
+create table shipment
+(
+	ship_id bigserial primary key,
+	ship_date timestamp NOT null,
+	weight float(30) NOT null,
+	diler_id serial references diler(diler_id),
+	CHECK (weight > 0.5)
+
+);
+
+create table furniture
+(
+	id bigserial primary key,
+	"length" float(20) NOT null,
+	height float(20) not null,
+	"depth" float(20) not null,
+	ship_name bigserial references shipment(ship_id),
+	"cost" int not null,
+	colour_id int references colours(colour_id),
+	CHECK ( "length" between 0.3 and 10),
+	CHECK (height between 0.1 and 5),
+	CHECK ("depth" between 0.1 and 5),
+	CHECK ("cost" > 0)
+
+);
+
+create table sofa
+(
+	id bigserial references furniture(id),
+	num_seats int NOT null,
+	expand bool,
+	corner bool not null
+);
+
+create table wardrobe
+(
+	id bigserial references furniture(id),
+	num_shelfs int NOT null,
+	CHECK (num_shelfs > 0)
+
+);
+
+create table stol
+(
+	id bigserial references furniture(id),
+	expand bool NOT null,
+
+);
+
+create table orders
+(
+	user_id bigserial references users(user_id),
+	order_date timestamp not null,
+	order_cost float(15) not null
+	CHECK (order_cost > 0)
+);
+
+create table basket
+(
+	stuff_id bigserial references furniture(id),
+	user_id bigserial references users(user_id),
+	quantity int not null,
+	CHECK (quantity > 0)
+);
+
+INSERT INTO users (user_id, "name", second_name, phone, email, is_admin)
+VALUES
+(1, 'Mikhail', 'Pokachalov', '+79999999999', 'admin1@yandex.ru', True),
+(2, 'Vladislav', 'Rizhenin', '+79998888888', 'admin2@yandex.ru', True),
+(3, 'Tester', 'Testerov', '+79061532136', 'pytest@gmail.com', False),
+(4, 'Daniil', 'Bruskov', '+79001113478', 'test1@yandex.ru', False),
+(5, 'Eugene', 'Krabs', '+79555568189', 'money.many@yandex.ru', False),
+(6, 'Spanch-Bob', 'Squarepanats', '+79993531128', 'sq.dward@mail.ru', False),
+(7, 'Optimus', 'Prime', '+79044431311', 'megatron.must.die@gmail.com', False),
+(8, 'Nikolai', 'Romanov', '+79062558136', 'imperia@mail.ru', False),
+(9, 'Olga', 'Krasnikova', '+79531309911', 'test2@yandex.ru', False),
+(10, 'Sophia', 'Plotnikova', '+79521560834', 's.plotnikova@mail.ru', False);
+
+INSERT INTO colours (colour_id, colour_name)
+VALUES
+(1, 'Red'),
+(2, 'Yellow'),
+(3, 'Green'),
+(4, 'Black'),
+(5, 'White'),
+(6, 'Brown'),
+(7, 'Purple'),
+(8, 'Grey'),
+(9, 'Pink'),
+(10,'Blue');
+
+INSERT INTO diler (diler_id, diler_name, is_related)
+VALUES
+(1, 'TestCompany1', False),
+(2, 'TestCompany2', False),
+(3, 'TableIndustries', True),
+(4, 'WardrobePride', True),
+(5, 'SofaLine', True);
+
+INSERT INTO shipment (ship_id, diler_id, ship_date, weight)
+VALUES
+(DEFAULT, DEFAULT, '2023-11-12 11:24:11', 30.5),
+(DEFAULT, DEFAULT, '2023-10-24 12:41:32', 40.6),
+(DEFAULT, DEFAULT, '2023-09-28 14:05:45', 42.4),
+(DEFAULT, DEFAULT, '2022-08-06 16:32:10', 35.5),
+(DEFAULT, DEFAULT, '2022-07-08 09:05:06', 19.9);
+
+INSERT INTO furniture (ship_name, "id", colour_id, "length", height, "depth", "cost")
+VALUES
+(1, 1, 10, 2, 3, 4, 19000),
+(2, 2, 9, 1, 2, 3, 5350),
+(3, 3, 8, 3, 2, 1, 4200),
+(4, 4, 7, 4, 4, 4, 5450),
+(4, 5, 6, 5, 4, 4, 4578),
+(5, 6, 5, 0.3, 2, 3, 13267),
+(5, 7, 4, 1, 1, 1, 13000),
+(1, 8, 3, 0.3, 2, 2, 5700),
+(2, 9, 2, 3, 3, 3, 3900),
+(3, 10, 1, 9, 4, 4, 22850);
+
+INSERT INTO sofa ("id", num_seats, expand, corner)
+VALUES
+(1, 2, True, False),
+(2, 4, True, True),
+(3, 2, False, False),
+(4, 2, True, True),
+(5, 4, False, False),
+(6, 4, False, True),
+(7, 1, False, False),
+(8, 1, True, False),
+(9, 1, True, True),
+(10, 1, False, True);
+
+INSERT INTO stol ("id", expand)
+VALUES
+(1, True),
+(2, False),
+(3, True),
+(4, False),
+(5, False),
+(6,  True);
+
+INSERT INTO orders (user_id, order_date, order_cost)
+VALUES
+(1, '2022-11-08 20:05:45', 19000),
+(3, '2022-02-11 16:45:06', 24350),
+(5, '2023-10-24 10:13:32', 5450),
+(7, '2023-03-25 09:21:32', 5700),
+(9, '2022-07-08 09:16:11', 9250);
+
+INSERT INTO wardrobe ("id", num_shelfs)
+VALUES
+(1, 1),
+(2, 2),
+(5, 3),
+(6, 4),
+(9, 5);
+
+INSERT INTO basket (stuff_id, user_id, quantity)
+VALUES
+(1, 1, 2),
+(3, 3, 1),
+(5, 5, 4),
+(4, 4, 3),
+(3, 1, 2),
+(5, 3, 1),
+(5, 2, 4),
+(8, 6, 3);
