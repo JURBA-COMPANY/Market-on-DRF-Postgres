@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 
 engine = create_engine("postgresql+psycopg2://postgres:1234@localhost/Mivla")
 session = Session(bind=engine)
-users = session.query(Users.user_id, Users.name, Users.second_name, Users.second_name, Users.phone, Users.email).all()
+users = session.query(Users.user_id, Users.name, Users.second_name, Users.phone, Users.email).all()
 colours = session.query(Colours.colour_id, Colours.colour_name).all()
 diler = session.query(Diler.diler_id, Diler.diler_name, Diler.is_related).all()
 furniture = session.query(Furniture.id, Furniture.height, Furniture.depth, Furniture.length, Furniture.ship_name,
