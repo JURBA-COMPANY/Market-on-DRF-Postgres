@@ -1,7 +1,7 @@
-#Для работы требуется импортировать DBclasses.
 #engine = create_engine("postgresql+psycopg2://postgres:123@localhost/Mivla")
 #session = Session(bind=engine)
 
+import * from DBclasses
 from service_parent import service
 
 
