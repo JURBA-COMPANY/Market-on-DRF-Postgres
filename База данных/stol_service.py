@@ -7,7 +7,7 @@ session = Session(bind=engine)
 
 class stol_service(service):
     def get(self, idles):
-        getid = session.query(Stol.id, Stol.expand).filter_by(id=idles).all()
+        getid = session.query(Stol.id, Stol.expand).filter_by(id=idles).one()
         return getid
     
     def getall(self):
