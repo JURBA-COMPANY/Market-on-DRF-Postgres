@@ -7,7 +7,7 @@ session = Session(bind=engine)
 
 class sofa_service(service):
     def get(self, idles):
-        getid = session.query(Sofa.id, Sofa.num_seats, Sofa.expand, Sofa.corner).filter_by(id=idles).all()
+        getid = session.query(Sofa.id, Sofa.num_seats, Sofa.expand, Sofa.corner).filter_by(id=idles).one()
         return getid
 
     def getall(self):
