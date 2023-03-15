@@ -7,7 +7,7 @@ session = Session(bind=engine)
 
 class wardrobe_service(service):
     def get(self, idles):
-        getid = session.query(Wardrobe.id, Wardrobe.num_shelfs).filter_by(id=idles).all()
+        getid = session.query(Wardrobe.id, Wardrobe.num_shelfs).filter_by(id=idles).one()
         return getid
 
     def getall(self):
