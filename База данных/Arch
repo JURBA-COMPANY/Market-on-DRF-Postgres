@@ -52,7 +52,8 @@ create table furniture
 
 create table sofa
 (
-	id bigserial references furniture(id),
+	self_id serial primary key,
+	fur_id bigserial references furniture(id),
 	num_seats int NOT null,
 	expand bool,
 	corner bool not null
@@ -60,7 +61,8 @@ create table sofa
 
 create table wardrobe
 (
-	id bigserial references furniture(id),
+	self_id serial primary key,
+	fur_id bigserial references furniture(id),
 	num_shelfs int NOT null,
 	CHECK (num_shelfs > 0)
 
@@ -68,7 +70,8 @@ create table wardrobe
 
 create table stol
 (
-	id bigserial references furniture(id),
+	self_id serial primary key,
+	fur_id bigserial references furniture(id),
 	expand bool NOT null,
 
 );
@@ -145,27 +148,27 @@ VALUES
 (2, 9, 2, 3, 3, 3, 3900),
 (3, 10, 1, 9, 4, 4, 22850);
 
-INSERT INTO sofa ("id", num_seats, expand, corner)
+INSERT INTO sofa (self_id,fur_id, num_seats, expand, corner)
 VALUES
-(1, 2, True, False),
-(2, 4, True, True),
-(3, 2, False, False),
-(4, 2, True, True),
-(5, 4, False, False),
-(6, 4, False, True),
-(7, 1, False, False),
-(8, 1, True, False),
-(9, 1, True, True),
-(10, 1, False, True);
+(DEFAULT, 1, 2, True, False),
+(DEFAULT, 2, 4, True, True),
+(DEFAULT, 3, 2, False, False),
+(DEFAULT, 4, 2, True, True),
+(DEFAULT, 5, 4, False, False),
+(DEFAULT, 6, 4, False, True),
+(DEFAULT, 7, 1, False, False),
+(DEFAULT, 8, 1, True, False),
+(DEFAULT, 9, 1, True, True),
+(DEFAULT, 10, 1, False, True);
 
-INSERT INTO stol ("id", expand)
+INSERT INTO stol (self_id, fur_id, expand)
 VALUES
-(1, True),
-(2, False),
-(3, True),
-(4, False),
-(5, False),
-(6,  True);
+(DEFAULT, 1, True),
+(DEFAULT, 2,False),
+(DEFAULT, 3, True),
+(DEFAULT, 4, False),
+(DEFAULT, 5, False),
+(DEFAULT, 6,  True);
 
 INSERT INTO orders (user_id, order_date, order_cost)
 VALUES
@@ -175,13 +178,13 @@ VALUES
 (7, '2023-03-25 09:21:32', 5700),
 (9, '2022-07-08 09:16:11', 9250);
 
-INSERT INTO wardrobe ("id", num_shelfs)
+INSERT INTO wardrobe (self_id, fur_id, num_shelfs)
 VALUES
-(1, 1),
-(2, 2),
-(5, 3),
-(6, 4),
-(9, 5);
+(DEFAULT, 1, 1),
+(DEFAULT, 2, 2),
+(DEFAULT, 5, 3),
+(DEFAULT, 6, 4),
+(DEFAULT, 9, 5);
 
 INSERT INTO basket (stuff_id, user_id, quantity)
 VALUES
