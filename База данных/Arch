@@ -78,6 +78,7 @@ create table stol
 
 create table orders
 (
+	id bigserial primary key,
 	user_id bigserial references users(user_id),
 	order_date timestamp not null,
 	order_cost float(15) not null
@@ -170,13 +171,13 @@ VALUES
 (DEFAULT, 5, False),
 (DEFAULT, 6,  True);
 
-INSERT INTO orders (user_id, order_date, order_cost)
+INSERT INTO orders (id,user_id, order_date, order_cost)
 VALUES
-(1, '2022-11-08 20:05:45', 19000),
-(3, '2022-02-11 16:45:06', 24350),
-(5, '2023-10-24 10:13:32', 5450),
-(7, '2023-03-25 09:21:32', 5700),
-(9, '2022-07-08 09:16:11', 9250);
+(DEFAULT, 1, '2022-11-08 20:05:45', 19000),
+(DEFAULT, 3, '2022-02-11 16:45:06', 24350),
+(DEFAULT, 5, '2023-10-24 10:13:32', 5450),
+(DEFAULT, 7, '2023-03-25 09:21:32', 5700),
+(DEFAULT, 9, '2022-07-08 09:16:11', 9250);
 
 INSERT INTO wardrobe (self_id, fur_id, num_shelfs)
 VALUES
