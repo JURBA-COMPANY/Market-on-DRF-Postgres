@@ -40,7 +40,7 @@ create table furniture
 	"length" float(20) NOT null,
 	height float(20) not null,
 	"depth" float(20) not null,
-	ship_name bigserial references shipment(ship_id),
+	ship_id bigserial references shipment(ship_id),
 	"cost" int not null,
 	colour_id int references colours(colour_id),
 	CHECK ( "length" between 0.3 and 10),
