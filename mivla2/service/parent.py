@@ -1,5 +1,6 @@
 from itertools import chain
 from .filtre_universale import filtre_universale
+from .models import *
 
 
 def get_all():
