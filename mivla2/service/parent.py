@@ -3,9 +3,9 @@ from .filtre_universale import filtre_universale
 from .models import *
 
 
-def get_all():
-    fur_list = ['Sofa', 'Stol', 'Wardrobe']
-    list_of_all_obj = [eval(f"{i}.objects.all()") for i in fur_list]
+
+def get_all_from_table(*args):
+    list_of_all_obj = [eval(f"{i}.objects.all()") for i in args]
     return list_of_all_obj
 
 
