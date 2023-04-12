@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from mivla2.service.models import Furniture
+from .models import *
 
 
 class FurnitureSerializer(serializers.ModelSerializer):
@@ -10,17 +10,17 @@ class FurnitureSerializer(serializers.ModelSerializer):
 
 class SofaSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Furniture
+        model = Sofa
         fields = ('self_id', 'fur', 'num_seats', 'expand', 'corner')
 
 
 class StolSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Furniture
+        model = Stol
         fields = ('self_id', 'fur', 'expand')
 
 
 class WardrobeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Furniture
+        model = Wardrobe
         fields = ('self_id', 'fur', 'num_shelfs')
