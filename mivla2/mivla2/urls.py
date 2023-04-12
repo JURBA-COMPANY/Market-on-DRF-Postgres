@@ -18,13 +18,11 @@ from django.urls import path, include
 from service.views import *
 
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('mainpage.urls'), name='index'),
-    path('catalog/', include('service.urls'), name='get_all'),
-    path('api/v1/sofalist', SofaAPIView.as_view()),
-    path('api/v1/wardrobelist', WardrobeAPIView.as_view()),
-    path('api/v1/stollist', StolAPIView.as_view()),
-    path('api/v1/furniturelist', FurnitureAPIView.as_view())
+    path('catalog/', include('service.urls'), name='get_all')
 ]
+
 
