@@ -10,21 +10,26 @@ def shop(request):
     return render(request, 'service/catalog.html', context)
 
 
-class SofaAPIView(generics.ListAPIView):
+class SofaAPIView(generics.ListCreateAPIView):
     queryset = Sofa.objects.all()
     serializer_class = SofaSerializer
 
 
-class StolAPIView(generics.ListAPIView):
+class StolAPIView(generics.ListCreateAPIView):
     queryset = Stol.objects.all()
     serializer_class = StolSerializer
 
 
-class WardrobeAPIView(generics.ListAPIView):
+class WardrobeAPIView(generics.ListCreateAPIView):
     queryset = Wardrobe.objects.all()
     serializer_class = WardrobeSerializer
     
     
-class FurnitureAPIView(generics.ListAPIView):
+class FurnitureAPIView(generics.ListCreateAPIView):
     queryset = Furniture.objects.all()
     serializer_class = FurnitureSerializer
+
+
+class SofaEntityView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Sofa.objects.all()
+    serializer_class = SofaSerializer 
